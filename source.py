@@ -2,7 +2,6 @@ from Tkinter import *
 
 def callback():
 	print 3
-	print HelloWorld
 	print 2
 
 	button.configure(text="clicked!")
