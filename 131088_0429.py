@@ -1,15 +1,9 @@
-def throwerror(ErrNum) :
-    if ErrNum == 101 :
-        print HulHul
-    if ErrNum == 202 :
-        print HulHulHulHul
-
 def findWhat(stringN) :
     name = stringN.split()[5]
     
     if name == "[error]" :
         value = stringN.split(']')[3]
-        str = value.split(':')
+        strAnalog = value.split(':')
 
         search1 = ['File','does','not','exist']
         search2 = ['Invalid','URI','in','request','GET','invalid']
@@ -17,29 +11,29 @@ def findWhat(stringN) :
         search4 = ['client','denied','by','server','configuration']
         search5 = ['attempt','to','invoke','directory','as','script']
 
-        result1 = all(x in str[0] for x in search1)
-        result2 = all(x in str[0] for x in search2)
-        result3 = all(x in str[0] for x in search3)
-        result4 = all(x in str[0] for x in search4)
-        result5 = all(x in str[0] for x in search5)
+        result1 = all(x in strAnalog[0] for x in search1)
+        result2 = all(x in strAnalog[0] for x in search2)
+        result3 = all(x in strAnalog[0] for x in search3)
+        result4 = all(x in strAnalog[0] for x in search4)
+        result5 = all(x in strAnalog[0] for x in search5)
         
         if result1 == True :
-            errorFDNE.append(str)
+            errorFDNE.append(strAnalog)
             error.append(stringN)
         elif result2 == True :
-            errorIUIRGI.append(str)
+            errorIUIRGI.append(strAnalog)
             error.append(stringN)
         elif result3 == True :
-            errorSNFOUTS.append(str)
+            errorSNFOUTS.append(strAnalog)
             error.append(stringN)
         elif result4 == True :
-            errorCDBSC.append(str)
+            errorCDBSC.append(strAnalog)
             error.append(stringN)
         elif result5 == True :
-            errorATIDAS.append(str)
+            errorATIDAS.append(strAnalog)
             error.append(stringN)
         else :
-            errUNKNOWN.append(str)
+            errUNKNOWN.append(strAnalog)
             error.append(stringN)
 
     elif name == "[notice]" :
@@ -104,14 +98,12 @@ warn=[]
 notice=[]
 FXXK=[]
 
-try :
-    errorFile = open('/Users/TARDIS/Documents/GIT_EX/error_log.txt')
-    for line in errorFile:
-        findWhat(line)
-    showresult()
+errorFile = open('/Users/TARDIS/Documents/GIT_EX/error_log.txt')
+for line in errorFile:
+    findWhat(line)
+showresult()
 
+'''
 except hulhul:
     throwerror(101)
-
-except HulHulHulHul:
-    throwerror(202)
+'''
