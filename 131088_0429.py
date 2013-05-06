@@ -1,49 +1,109 @@
 def findWhat(stringN) :
-    countError = 0
-    countWarn = 0
-    countNotice = 0
     name = stringN.split()[5]
     
     if name == "[error]" :
-        countError += 1
-        error.append(stringN)
+        value = stringN.split(']')[3]
+        strAnalog = value.split(':')
+
+        search1 = ['File','does','not','exist']
+        search2 = ['Invalid','URI','in','request','GET','invalid']
+        search3 = ['script','not','found','or','unable','to','stat']
+        search4 = ['client','denied','by','server','configuration']
+        search5 = ['attempt','to','invoke','directory','as','script']
+
+        result1 = all(x in strAnalog[0] for x in search1)
+        result2 = all(x in strAnalog[0] for x in search2)
+        result3 = all(x in strAnalog[0] for x in search3)
+        result4 = all(x in strAnalog[0] for x in search4)
+        result5 = all(x in strAnalog[0] for x in search5)
+        
+        if result1 == True :
+            errorFDNE.append(strAnalog)
+            error.append(stringN)
+        elif result2 == True :
+            errorIUIRGI.append(strAnalog)
+            error.append(stringN)
+        elif result3 == True :
+            errorSNFOUTS.append(strAnalog)
+            error.append(stringN)
+        elif result4 == True :
+            errorCDBSC.append(strAnalog)
+            error.append(stringN)
+        elif result5 == True :
+            errorATIDAS.append(strAnalog)
+            error.append(stringN)
+        else :
+            errUNKNOWN.append(strAnalog)
+            error.append(stringN)
 
     elif name == "[notice]" :
-        countNotice += 1
         notice.append(stringN)
 
     elif name == "[warn]" :
-        countWarn += 1
         warn.append(stringN)
 
     else :
         FXXK.append(stringN)
 
-    print '================COUNT================'
-    print "Error  : ", countError
-    print "Warn   : ", countWarn
-    print "Notice : ", countNotice
-    print '================ERROR================'
-    print error
-    print '\n'
-    print '================WARN================='
-    print warn
-    print '\n'
-    print '================NOTICE==============='
-    print notice
-    print '\n'
-    print '================ELSE================='
-    print FXXK
-    print '\n'
-    print '=================END================='
-
+def showresult() :
+    print '================================COUNT================================'
+    print "Error  : ", len(error)
+    print "Warn   : ", len(warn)
+    print "Notice : ", len(notice)
+    print "Else   : ", len(FXXK)
+    print '================================ERROR================================'
+    print "1. File does not exist : \n"
+    for x in range(0,len(errorFDNE)) :
+        print errorFDNE[x][1]
+    print "\n"
+    print "2. Invalid URI in request GET invalid : \n"
+    for x in range(0,len(errorIUIRGI)) :
+        print errorIUIRGI[x][0]
+    print "\n"
+    print "3. script not found or unable to stat : \n"
+    for x in range(0,len(errorSNFOUTS)) :
+        print errorSNFOUTS[x][1]
+    print "\n"
+    print "4. client denied by server configuration : \n"
+    for x in range(0,len(errorCDBSC)) :
+        print errorCDBSC[x][1]
+    print "\n"
+    print "5. attempt to invoke directory as script : \n"
+    for x in range(0,len(errorATIDAS)) :
+        print errorATIDAS[x][1]
+    print "\n"
+    print "6. Unknown : \n"
+    for x in range(0,len(errUNKNOWN)) :
+        print errUNKNOWN[x]
+    print "\n"
+    print '================================WARN================================='
+    for x in range(0,len(warn)) :
+        print warn[x]
+    print '================================NOTICE==============================='
+    for x in range(0,len(notice)) :
+        print notice[x]
+    print '================================ELSE================================='
+    for x in range(0,len(FXXK)) :
+        print FXXK[x]
+    print '================================END=================================='
 
 error=[]
+errorFDNE=[]
+errorIUIRGI=[]
+errorSNFOUTS=[]
+errorCDBSC=[]
+errorATIDAS=[]
+errUNKNOWN=[]
 warn=[]
 notice=[]
 FXXK=[]
 
-input = "[Fri Oct 05 08:35:39 2012] [error] [client ::1] File does not exist: /Library/WebServer/Documents/favicon.ico"
+errorFile = open('/Users/TARDIS/Documents/GIT_EX/error_log.txt')
+for line in errorFile:
+    findWhat(line)
+showresult()
 
-findWhat(input)
-
+'''
+except hulhul:
+    throwerror(101)
+'''
